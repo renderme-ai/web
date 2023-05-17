@@ -1,14 +1,11 @@
-import SmallCard from '../components/SmallCard';
-import { projectIcons } from '../components/Icons';
-
-import { projects } from '../utils/projectsData';
+import Link from 'next/link'
 
 const Home = () => (
   <div className="home">
     <h1>render.me</h1>
     <h2>Deploy your React app in seconds.</h2>
     <button>
-      <a href="/start">Get Started</a>
+      <Link href="/start">Get Started</Link>
     </button>
   </div>
 );

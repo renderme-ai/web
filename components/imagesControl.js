@@ -21,4 +21,4 @@ export default function ImagesControl({ files }) {
         ))}
     </Carousel>
   );
-};
+}
