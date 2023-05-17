@@ -1,4 +1,10 @@
 import { useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'next/image';
+import Carousel from 'react-bootstrap/Carousel';
+import ImagesControl from '../../components/imagesControl';
 
 const Start = () => {
   const [files, setFiles] = useState([]);
@@ -18,12 +24,11 @@ const Start = () => {
           setFiles(images);
         }}
       />
-      <div>
-        {files.length > 0 &&
-          files.map((file, index) => (
-            <img key={`${file}-${index}`} alt={`uploaded ${index + 1}`} src={file} />
-          ))}
-      </div>
+      <Container>
+        <Row>
+          {files.length > 0 && <ImagesControl files={files} />}
+        </Row>
+      </Container>
     </div>
   );
 };
