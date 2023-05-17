@@ -6,48 +6,59 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 const Start = () => {
-  const [files, setFiles] = useState([]);
+  const [previews, setPreviews] = useState([]);
+  const [blobs, setBlobs] = useState([]);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    event.persist();
+    const formData = new FormData(event.currentTarget);
+    console.log(event.currentTarget, event.target, blobs, 'RICK');
+    for (let i = 0; i < blobs.length; i++) {
+      formData.append('files', blobs[i]);
+    }
+    // http://localhost:7071/api/UploadImages
+    const results = await axios.post(
+      'https://rendermefx.azurewebsites.net/api/UploadImages',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+  };
   return (
     <div className="home">
       <h1>Upload your images</h1>
-      <input
-        id="fileUpload"
-        type="file"
-        multiple
-        accept="image/jpeg,image/png,image/gif"
-        onChange={(event) => {
-          let images = [];
-          for (let i = 0; i < event.target.files.length; i++) {
-            images.push(URL.createObjectURL(event.target.files[i]));
-          }
-          setFiles(images);
-        }}
-      />
-      <Container fluid={true}>
-        <Row>{files.length > 0 && <ImagesControl files={files} />}</Row>
-        <Row style={{ padding: '10px' }}>
-          {files.length > 0 && (
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => {
-                axios
-                  .get(
-                    'https://rendermefx.azurewebsites.net/api/MainHttpTrigger'
-                  )
-                  .then((res) => {
-                    console.log('success', res);
-                  })
-                  .catch((err) => {
-                    console.log('error!!!', err);
-                  });
-              }}
-            >
-              Start Training
-            </Button>
-          )}
-        </Row>
-      </Container>
+      <form onSubmit={handleFormSubmit} encType="multipart/form-data">
+        <input
+          id="fileUpload"
+          name="file"
+          type="file"
+          multiple
+          accept="image/jpeg,image/png,image/gif"
+          onChange={(event) => {
+            let images = [];
+            for (let i = 0; i < event.target.files.length; i++) {
+              images.push(URL.createObjectURL(event.target.files[i]));
+            }
+            const files = Array.from(event.target.files);
+            setBlobs(files);
+            setPreviews(images);
+          }}
+        />
+        <Container fluid={true}>
+          <Row>{previews.length > 0 && <ImagesControl files={previews} />}</Row>
+          <Row style={{ padding: '10px' }}>
+            {previews.length > 0 && (
+              <Button variant="primary" size="lg" type="submit">
+                Start Training!
+              </Button>
+            )}
+          </Row>
+        </Container>
+      </form>
     </div>
   );
 };
