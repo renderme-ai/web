@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Image from 'next/image';
 import Carousel from 'react-bootstrap/Carousel';
 import ImagesControl from '../../components/imagesControl';
+import { Button } from 'react-bootstrap';
 
 const Start = () => {
   const [files, setFiles] = useState([]);
@@ -25,8 +26,13 @@ const Start = () => {
         }}
       />
       <Container fluid={true}>
-        <Row>
-          {files.length > 0 && <ImagesControl files={files} />}
+        <Row>{files.length > 0 && <ImagesControl files={files} />}</Row>
+        <Row style={{ padding: '10px' }}>
+          {files.length > 0 && (
+            <Button variant="primary" size="lg">
+              Start Training
+            </Button>
+          )}
         </Row>
       </Container>
     </div>
