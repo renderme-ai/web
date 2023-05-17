@@ -1,24 +1,39 @@
+import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import Image from 'next/image';
+import ReactCrop from 'react-image-crop';
+import { Image } from 'react-bootstrap';
 
 export default function ImagesControl({ files }) {
+  const [crop, setCrop] = React.useState();
   if (files.length === 0) return null;
   return (
-    <Carousel height={'75vh'}>
+    <Carousel height={'75vh'} interval={null}>
       {files.length > 0 &&
-        files.map((file, index) => (
-          <Carousel.Item key={`${file}-${index}`} style={{ height: '75vh' }}>
-            <Image
-              className="d-block w-100"
-              layout="fill"
-              alt={`uploaded ${index + 1}`}
-              src={file}
-            />
-            <Carousel.Caption>
-              <h5>Pic # {index + 1}</h5>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
+        files.map((file, index) => {
+          console.log(file);
+          return (
+            <Carousel.Item
+              key={`${file}-${index}`}
+              style={{
+                height: '512px',
+                background: '#2d2e29',
+                textAlign: 'center',
+              }}
+            >
+              <ReactCrop crop={crop} onChange={(c) => setCrop(c)}>
+                <Image
+                  src={file}
+                  style={{ maxWidth: '800px' }}
+                  height={'512px'}
+                  scale={1}
+                />
+              </ReactCrop>
+              <Carousel.Caption>
+                <h5>Pic # {index + 1}</h5>
+              </Carousel.Caption>
+            </Carousel.Item>
+          );
+        })}
     </Carousel>
   );
 }
