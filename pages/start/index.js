@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Image from 'next/image';
-import Carousel from 'react-bootstrap/Carousel';
 import ImagesControl from '../../components/imagesControl';
 import { Button } from 'react-bootstrap';
 
