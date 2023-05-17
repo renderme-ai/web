@@ -8,29 +8,36 @@ import axios from 'axios';
 const Start = () => {
   const [previews, setPreviews] = useState([]);
   const [blobs, setBlobs] = useState([]);
+  const [email, setEmail] = useState('rickagz@gmail.com');
+  const [settings, updateSettings] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     event.persist();
     const formData = new FormData(event.currentTarget);
-    console.log(event.currentTarget, event.target, blobs, 'RICK');
     for (let i = 0; i < blobs.length; i++) {
       formData.append('files', blobs[i]);
     }
-    // http://localhost:7071/api/UploadImages
-    const results = await axios.post(
-      'https://rendermefx.azurewebsites.net/api/UploadImages',
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    );
+
+    const apiUrl =
+      process.env.NEXT_PUBLIC_API_URL ||
+      'https://rendermefx.azurewebsites.net/api/UploadImages';
+    const url = `${apiUrl}?email=${email}}`;
+
+    const results = await axios.post(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   };
   return (
     <div className="home">
       <h1>Upload your images</h1>
+      <input
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <form onSubmit={handleFormSubmit} encType="multipart/form-data">
         <input
           id="fileUpload"
