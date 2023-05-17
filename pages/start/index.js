@@ -24,7 +24,7 @@ const Start = () => {
           setFiles(images);
         }}
       />
-      <Container>
+      <Container fluid={true}>
         <Row>
           {files.length > 0 && <ImagesControl files={files} />}
         </Row>
