@@ -1,15 +1,38 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import ImagesControl from '../../components/imagesControl';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import PrettyBackground from '../../components/PrettyBackground';
+import styled from '@emotion/styled';
+
+const EmailInput = styled.input`
+  width: 360px;
+  text-align: center;
+  padding: 10px;
+`;
+
+const FileInput = styled.input`
+  margin-bottom: 20px;
+  margin-left: 20%;
+`;
 
 const Start = () => {
   const [previews, setPreviews] = useState([]);
   const [blobs, setBlobs] = useState([]);
-  const [email, setEmail] = useState('rickagz@gmail.com');
+  const [email, setEmail] = useState('');
   const [settings, updateSettings] = useState(false);
+
+  const scrollToTrainingButton = () => {
+    const el = document.getElementById('training-button');
+    el.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'nearest',
+    });
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -31,15 +54,30 @@ const Start = () => {
     });
   };
   return (
-    <div className="home">
-      <h1>Upload your images</h1>
-      <input
+    <PrettyBackground className="home">
+      <h1>Woo! Let's get started!</h1>
+      <hr />
+      <h3>
+        <p>
+          Upload some photos of yourself and we'll start working on training
+          your AI model with them.
+        </p>
+        <p>
+          We'll send you an email with a link to a professional-level UI with
+          your trained model once it's ready.
+        </p>
+      </h3>
+      <p>First, what is your email?</p>
+      <EmailInput
         type="text"
         value={email}
+        placeholder={'yourbeautifulself@gmail.com'}
         onChange={(e) => setEmail(e.target.value)}
       />
+      <hr />
+      <p>Please upload between 10 and 20 photos of yourself.</p>
       <form onSubmit={handleFormSubmit} encType="multipart/form-data">
-        <input
+        <FileInput
           id="fileUpload"
           name="file"
           type="file"
@@ -53,20 +91,27 @@ const Start = () => {
             const files = Array.from(event.target.files);
             setBlobs(files);
             setPreviews(images);
+            scrollToTrainingButton();
           }}
         />
         <Container fluid={true}>
           <Row>{previews.length > 0 && <ImagesControl files={previews} />}</Row>
-          <Row style={{ padding: '10px' }}>
+          <Row style={{ padding: '10px', marginBottom: '200px' }}>
             {previews.length > 0 && (
-              <Button variant="primary" size="lg" type="submit">
+              <Button
+                id="training-button"
+                variant="primary"
+                size="lg"
+                type="submit"
+                className={'button-training'}
+              >
                 Start Training!
               </Button>
             )}
           </Row>
         </Container>
       </form>
-    </div>
+    </PrettyBackground>
   );
 };
 

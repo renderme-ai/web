@@ -186,3 +186,9 @@ h1 {
 .button-github {
   background: #393939;
 }
+
+.button-training {
+  margin-top: 50px !important;
+  font-size: 50px !important;
+  background-image: linear-gradient(to right, #f857a6 0%, #ff5858 51%, #f857a6 100%);
+}

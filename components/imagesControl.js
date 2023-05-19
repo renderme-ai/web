@@ -7,7 +7,7 @@ export default function ImagesControl({ files }) {
   const [crop, setCrop] = React.useState();
   if (files.length === 0) return null;
   return (
-    <Carousel height={'75vh'} interval={null}>
+    <Carousel height={'75vh'} interval={null} slide={false} fade={true}>
       {files.length > 0 &&
         files.map((file, index) => {
           console.log(file);
@@ -21,12 +21,7 @@ export default function ImagesControl({ files }) {
               }}
             >
               <ReactCrop crop={crop} onChange={(c) => setCrop(c)}>
-                <Image
-                  src={file}
-                  style={{ maxWidth: '800px' }}
-                  height={'512px'}
-                  scale={1}
-                />
+                <Image src={file} width={'512px'} scale={1} />
               </ReactCrop>
               <Carousel.Caption>
                 <h5>Pic # {index + 1}</h5>
