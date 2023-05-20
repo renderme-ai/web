@@ -36,7 +36,16 @@ const Logo = styled.h1`
   margin-top: 0px;
   margin-bottom: 10px;
   font-family: sans-serif;
-  font-size: 4rem;
+  font-size: 6rem;
+  @media (max-width: 580px) {
+    font-size: 5rem;
+  }
+  @media (max-width: 420px) {
+    font-size: 4.5rem;
+  }
+  @media (max-width: 360px) {
+    font-size: 4rem;
+  }
   background: linear-gradient(
     to right,
     #ef5350,
