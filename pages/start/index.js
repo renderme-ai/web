@@ -12,6 +12,7 @@ const EmailInput = styled.input`
   width: 360px;
   text-align: center;
   padding: 10px;
+  font-size: 20px;
 `;
 
 const FileInput = styled.input`
@@ -23,10 +24,10 @@ const Start = () => {
   const [previews, setPreviews] = useState([]);
   const [blobs, setBlobs] = useState([]);
   const [email, setEmail] = useState('');
-  const [settings, updateSettings] = useState(false);
 
   const scrollToTrainingButton = () => {
     const el = document.getElementById('training-button');
+    if (!el) return;
     el.scrollIntoView({
       behavior: 'smooth',
       block: 'end',
@@ -45,7 +46,7 @@ const Start = () => {
     const apiUrl =
       process.env.NEXT_PUBLIC_API_URL ||
       'https://rendermefx.azurewebsites.net/api/UploadImages';
-    const url = `${apiUrl}?email=${email}}`;
+    const url = `${apiUrl}?email=${email}`;
 
     const results = await axios.post(url, formData, {
       headers: {
@@ -91,6 +92,7 @@ const Start = () => {
             const files = Array.from(event.target.files);
             setBlobs(files);
             setPreviews(images);
+
             scrollToTrainingButton();
           }}
         />
