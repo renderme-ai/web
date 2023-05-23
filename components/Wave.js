@@ -9,8 +9,8 @@ const Wave = styled.div`
   mask: var(--mask);
   background: #673ab7;
   width: 100%;
-  margin-top: -200px;
-  height: 200px;
+  margin-top: -150px;
+  height: 150px;
 `;
 
 export default Wave;
