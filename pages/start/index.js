@@ -99,7 +99,9 @@ const Start = () => {
         <ol>
           <li>
             Your images need to be 512x512, Crop them&nbsp;
-            <a href={'https://www.birme.net/?target_width=512&target_height=512'}>
+            <a
+              href={'https://www.birme.net/?target_width=512&target_height=512'}
+            >
               here
             </a>
             .
