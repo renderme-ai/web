@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import PrettyBackground from '../components/PrettyBackground';
 
 const CallToActionButton = styled.button`
-  margin: 40px 20px;
+  margin: 65px 20px;
   padding: 20px;
   font-size: 50px;
   font-weight: bold;

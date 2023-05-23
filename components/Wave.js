@@ -10,7 +10,7 @@ const Wave = styled.div`
   background: #673ab7;
   width: 100%;
   margin-top: -200px;
-  height: 250px;
+  height: 200px;
 `;
 
 export default Wave;
