@@ -17,7 +17,10 @@ const EmailInput = styled.input`
 
 const FileInput = styled.input`
   margin-bottom: 20px;
-  margin-left: 20%;
+`;
+
+const Form = styled.form`
+  margin-bottom: 200px;
 `;
 
 const Start = () => {
@@ -26,13 +29,8 @@ const Start = () => {
   const [email, setEmail] = useState('');
 
   const scrollToTrainingButton = () => {
-    const el = document.getElementById('training-button');
-    if (!el) return;
-    el.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-      inline: 'nearest',
-    });
+    const scrollingElement = document.scrollingElement || document.body;
+    scrollingElement.scrollTop = scrollingElement.scrollHeight;
   };
 
   const handleFormSubmit = async (event) => {
@@ -77,7 +75,7 @@ const Start = () => {
       />
       <hr />
       <p>Please upload between 10 and 20 photos of yourself.</p>
-      <form onSubmit={handleFormSubmit} encType="multipart/form-data">
+      <Form onSubmit={handleFormSubmit} encType="multipart/form-data">
         <FileInput
           id="fileUpload"
           name="file"
@@ -96,23 +94,33 @@ const Start = () => {
             scrollToTrainingButton();
           }}
         />
-        <Container fluid={true}>
-          <Row>{previews.length > 0 && <ImagesControl files={previews} />}</Row>
-          <Row style={{ padding: '10px', marginBottom: '200px' }}>
-            {previews.length > 0 && (
-              <Button
-                id="training-button"
-                variant="primary"
-                size="lg"
-                type="submit"
-                className={'button-training'}
-              >
-                Start Training!
-              </Button>
-            )}
-          </Row>
-        </Container>
-      </form>
+
+        <h4>Some guidelines to ensure best results:</h4>
+        <ol>
+          <li>
+            Your images need to be 512x512, Crop them&nbsp;
+            <a href={'https://www.birme.net/?target_width=512&target_height=512'}>
+              here
+            </a>
+            .
+          </li>
+          <li>Make sure you're the only one in the image.</li>
+          <li>Each image should have different clothes and backgrounds.</li>
+          <li>Provide clear images only. Avoid grainy ones.</li>
+        </ol>
+        {previews.length > 0 && <ImagesControl files={previews} />}
+        {previews.length > 0 && (
+          <Button
+            id="training-button"
+            variant="primary"
+            size="lg"
+            type="submit"
+            className={'button-training'}
+          >
+            Start Training!
+          </Button>
+        )}
+      </Form>
     </PrettyBackground>
   );
 };

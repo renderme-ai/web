@@ -188,7 +188,10 @@ h1 {
 }
 
 .button-training {
-  margin-top: 50px !important;
+  max-width: 690px !important;
+  margin: auto !important;
   font-size: 50px !important;
+  margin-top: 50px !important;
+  margin-bottom: 300px !important;
   background-image: linear-gradient(to right, #f857a6 0%, #ff5858 51%, #f857a6 100%);
 }

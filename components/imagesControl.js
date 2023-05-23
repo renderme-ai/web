@@ -1,13 +1,12 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import ReactCrop from 'react-image-crop';
 import { Image } from 'react-bootstrap';
 
 export default function ImagesControl({ files }) {
-  const [crop, setCrop] = React.useState();
   if (files.length === 0) return null;
+  const imageSize = Math.min(512, window.innerWidth - 20);
   return (
-    <Carousel height={'75vh'} interval={null} slide={false} fade={true}>
+    <Carousel interval={null} slide={false} fade={true}>
       {files.length > 0 &&
         files.map((file, index) => {
           console.log(file);
@@ -20,9 +19,7 @@ export default function ImagesControl({ files }) {
                 textAlign: 'center',
               }}
             >
-              <ReactCrop crop={crop} onChange={(c) => setCrop(c)}>
-                <Image src={file} width={'512px'} scale={1} />
-              </ReactCrop>
+              <Image src={file} width={`${imageSize}px`} scale={1} />
               <Carousel.Caption>
                 <h5>Pic # {index + 1}</h5>
               </Carousel.Caption>
